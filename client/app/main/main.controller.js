@@ -12,8 +12,6 @@
 
     vm.games = [];
     vm.nextUrl = '';
-    vm.total = 0;
-
 
     vm.loadGames = loadGames;
     vm.goTo = goTo;
@@ -28,7 +26,6 @@
       TwitchAPI.getGames(vm.nextUrl)
         .then(function(games) {
           vm.nextUrl = games._links.next;
-          vm.total = games._total;
           vm.games = vm.games.concat(games.top);
         });
     }

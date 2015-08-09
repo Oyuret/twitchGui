@@ -13,7 +13,6 @@
     vm.game = $routeParams.game;
     vm.streams = [];
     vm.nextUrl = '';
-    vm.total = 0;
     vm.promises = [];
     vm.kodiBusy = false;
 
@@ -31,7 +30,6 @@
       TwitchAPI.getStreams(vm.game, vm.nextUrl)
         .then(function(streams) {
           vm.nextUrl = streams._links.next;
-          vm.total = streams._total;
           vm.streams = vm.streams.concat(streams.streams);
         });
     }
