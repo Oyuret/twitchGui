@@ -15,6 +15,7 @@ module.exports = function(app) {
 
   app.post('/twitch', function(req,res){
     var url = req.body.url;
+
     requestify
       .get(url)
       .then(function(response){
