@@ -41,7 +41,6 @@
       vm.promises[index] = KodiAPI.playStream(name);
       vm.promises[index].then(function(data) {
         vm.kodiBusy = false;
-        console.log(data);
       });
 
     }
