@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+  /*jshint latedef: nofunc */
 
   angular
     .module('twitchguiApp')
@@ -8,6 +9,7 @@
   streamsCtrl.$inject = ['TwitchAPI', '$routeParams', 'KodiAPI'];
 
   function streamsCtrl(TwitchAPI, $routeParams, KodiAPI) {
+    /*jshint validthis:true */
     var vm = this;
 
     vm.game = $routeParams.game;
@@ -35,11 +37,13 @@
     }
 
     function play(name, index) {
-      if(vm.kodiBusy) return;
+      if(vm.kodiBusy) {
+        return;
+      }
 
       vm.kodiBusy = true;
       vm.promises[index] = KodiAPI.playStream(name);
-      vm.promises[index].then(function(data) {
+      vm.promises[index].then(function() {
         vm.kodiBusy = false;
       });
 

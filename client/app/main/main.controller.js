@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+  /*jshint latedef: nofunc */
 
   angular
     .module('twitchguiApp')
@@ -8,6 +9,7 @@
   mainCtrl.$inject = ['TwitchAPI', '$location'];
 
   function mainCtrl(TwitchAPI, $location) {
+    /*jshint validthis:true */
     var vm = this;
 
     vm.games = [];

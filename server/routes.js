@@ -10,9 +10,6 @@ var requestify = require('requestify');
 
 module.exports = function(app) {
 
-  // Insert routes below
-  //app.use('/api/things', require('./api/thing'));
-
   app.post('/twitch', function(req,res){
     var url = req.body.url;
 
