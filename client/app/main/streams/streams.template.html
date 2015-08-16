@@ -4,15 +4,15 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-6 col-sm-12 col-xs-12" ng-repeat="stream in vm.streams">
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-repeat="stream in vm.streams">
           <div class="well"
                cg-busy="{promise:vm.promises[$index],message:'Starting your Stream'}"
                ng-click="vm.play(stream.channel.name, $index)" style="cursor: pointer">
             <div class="row">
-              <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="col-md-4 col-sm-12 col-xs-12">
                 <img class="img-responsive" ng-src="{{stream.preview.medium}}">
               </div>
-              <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="col-md-8 col-sm-12 col-xs-12">
                 <h4>{{stream.channel.display_name}}</h4>
                 <br>
                 {{stream.channel.status}}

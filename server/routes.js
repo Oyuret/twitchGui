@@ -14,7 +14,7 @@ module.exports = function(app) {
     var url = req.body.url;
 
     requestify
-      .get(url)
+      .get(url, {headers:{'Connection': 'Keep-Alive'}})
       .then(function(response){
         res.send(response.getBody());
       });
@@ -24,7 +24,7 @@ module.exports = function(app) {
     var query = req.body.query;
 
     requestify
-      .post('http://192.168.1.30:80/jsonrpc', query)
+      .post('http://osmc.local/jsonrpc', query, {headers:{'Connection': 'Keep-Alive'}})
       .then(function(response){
         res.send(response.getBody());
       });
