@@ -17,6 +17,10 @@ module.exports = function(app) {
       .get(url, {headers:{'Connection': 'Keep-Alive'}})
       .then(function(response){
         res.send(response.getBody());
+      },function(error){
+        res.status(400).end(error);
+      }).catch(function(error){
+        res.status(400).end(error);
       });
   });
 
@@ -27,6 +31,10 @@ module.exports = function(app) {
       .post('http://osmc.local/jsonrpc', query, {headers:{'Connection': 'Keep-Alive'}})
       .then(function(response){
         res.send(response.getBody());
+      },function(error){
+        res.status(400).end(error);
+      }).catch(function(error){
+        res.status(400).end(error);
       });
   });
 

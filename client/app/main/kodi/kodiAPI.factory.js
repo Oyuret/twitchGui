@@ -23,7 +23,7 @@
       var addPlayList = [{'jsonrpc': '2.0', 'method': 'Playlist.Add', 'params':{'playlistid':1, 'item' :{ 'file' : pluginPath }}, 'id' :1}];
       var playVideo = {'jsonrpc': '2.0', 'method': 'Player.Open', 'params':{'item':{'playlistid':1, 'position' : 0}}, 'id': 1};
 
-      $http.post('/kodi', {query: getPlayerId})
+      $http.post('/kodi', {query: getPlayerId}, {timeout:10000})
         .then(function(idData){
           if(idData.data.result.length === 0) {
             return $http.post('/kodi', {query: clearVideoPlaylist});
@@ -33,11 +33,11 @@
             return $http.post('/kodi', {query: stopPlayer});
           }
         }).then(function(){
-          return $http.post('/kodi', {query: clearVideoPlaylist});
+          return $http.post('/kodi', {query: clearVideoPlaylist}, {timeout:10000});
         }).then(function(){
-          return $http.post('/kodi', {query: addPlayList});
+          return $http.post('/kodi', {query: addPlayList}, {timeout:10000});
         }).then(function(){
-          return $http.post('/kodi',{query: playVideo});
+          return $http.post('/kodi',{query: playVideo}, {timeout:30000});
         }).then(function(){
           deferred.resolve();
         }, function(errormsg){
