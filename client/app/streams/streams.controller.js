@@ -19,6 +19,10 @@
     vm.kodiBusy = false;
     vm.filterInput = '';
 
+    // Loading button
+    vm.loadingButtonText = "Fetch more!";
+    vm.loadingMore = false;
+
 
     vm.loadStreams = loadStreams;
     vm.play = play;
@@ -31,10 +35,18 @@
     }
 
     function loadStreams() {
+
+      vm.loadingButtonText = 'Fetching more...';
+      vm.loadingMore = true;
       TwitchAPI.getStreams(vm.game, vm.nextUrl)
         .then(function(streams) {
           vm.nextUrl = streams._links.next;
           vm.streams = vm.streams.concat(streams.streams);
+          vm.loadingButtonText = 'Fetch more!';
+          vm.loadingMore = false;
+        }, function(){
+          vm.loadingButtonText = 'Failed to load more!';
+          vm.loadingMore = false;
         });
     }
 
