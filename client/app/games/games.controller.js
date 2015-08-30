@@ -4,7 +4,7 @@
 
   angular
     .module('twitchguiApp')
-    .controller('MainCtrl', mainCtrl);
+    .controller('GamesCtrl', mainCtrl);
 
   mainCtrl.$inject = ['TwitchAPI', '$location'];
 
