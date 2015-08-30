@@ -39,7 +39,7 @@
           vm.nextUrl = games._links.next;
           vm.games = vm.games.concat(games.top);
           vm.loadingButtonText = 'Fetch more!';
-          vm.loadingMore = true;
+          vm.loadingMore = false;
         }, function(){
           vm.loadingButtonText = 'Failed to load more!';
           vm.loadingMore = false;
