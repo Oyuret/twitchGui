@@ -4,7 +4,19 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12" ng-repeat="stream in vm.streams">
+        <div class="col-md-12 col-sm-12">
+          <div class="well">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Filter..." ng-model="vm.filterInput">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="vm.clearFilter()">Clear</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12" ng-repeat="stream in vm.streams | filter:vm.filterInput">
           <div class="well"
                cg-busy="{promise:vm.promises[$index],message:'Starting your Stream'}"
                ng-click="vm.play(stream.channel.name, $index)" style="cursor: pointer">

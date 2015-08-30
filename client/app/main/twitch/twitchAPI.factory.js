@@ -20,10 +20,9 @@
       var url = next === '' ? 'https://api.twitch.tv/kraken/games/top?limit=50&offset=0' : next;
 
       $http.post('/twitch', {url : url})
-        .success(function(games){
-          deferred.resolve(games);
-        })
-        .error(function(){
+        .then(function(games){
+          deferred.resolve(games.data);
+        }, function(){
           deferred.resolve('Failed to fetch games');
         });
 
@@ -36,10 +35,9 @@
       var url = next === '' ? 'https://api.twitch.tv/kraken/streams?limit=25&offset=0&game='+game : next;
 
       $http.post('/twitch', {url : url})
-        .success(function(channels){
-          deferred.resolve(channels);
-        })
-        .error(function(){
+        .then(function(channels){
+          deferred.resolve(channels.data);
+        }, function(){
           deferred.resolve('Failed to fetch streams');
         });
 

@@ -14,9 +14,11 @@
 
     vm.games = [];
     vm.nextUrl = '';
+    vm.filterInput = '';
 
     vm.loadGames = loadGames;
     vm.goTo = goTo;
+    vm.clearFilter = clearFilter;
 
     activate();
 
@@ -34,6 +36,10 @@
 
     function goTo(url) {
       $location.path(url);
+    }
+
+    function clearFilter() {
+      vm.filterInput = '';
     }
   }
 

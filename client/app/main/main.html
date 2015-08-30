@@ -3,28 +3,39 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-
-          <div class="row">
-            <div class="col-md-6 col-sm-12" ng-repeat="game in vm.games">
-              <div class="media well" ng-click="vm.goTo('/'+game.game.name)" style="cursor: pointer">
-                <div class="pull-left">
-                  <img class="media-object" ng-src="{{game.game.box.medium}}">
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading">{{game.game.name}}</h4>
-                  <br>
-                  <span class="glyphicon glyphicon-facetime-video"> {{game.channels}}</span>
-                  <br>
-                  <span class="glyphicon glyphicon-user"> {{game.viewers}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <button class="btn btn-primary btn-block" ng-click="vm.loadGames()">Load more!</button>
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="well">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Filter..." ng-model="vm.filterInput">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button" ng-click="vm.clearFilter()">Clear</button>
+              </span>
             </div>
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12" ng-repeat="game in vm.games | filter:vm.filterInput">
+          <div class="media well" ng-click="vm.goTo('/'+game.game.name)" style="cursor: pointer">
+            <div class="pull-left">
+              <img class="media-object" ng-src="{{game.game.box.medium}}">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">{{game.game.name}}</h4>
+              <br>
+              <span class="glyphicon glyphicon-facetime-video"> {{game.channels}}</span>
+              <br>
+              <span class="glyphicon glyphicon-user"> {{game.viewers}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <button class="btn btn-primary btn-block" ng-click="vm.loadGames()">Load more!</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

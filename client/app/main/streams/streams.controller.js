@@ -17,10 +17,12 @@
     vm.nextUrl = '';
     vm.promises = [];
     vm.kodiBusy = false;
+    vm.filterInput = '';
 
 
     vm.loadStreams = loadStreams;
     vm.play = play;
+    vm.clearFilter = clearFilter;
 
     activate();
 
@@ -50,6 +52,10 @@
         vm.kodiBusy = false;
       });
 
+    }
+
+    function clearFilter() {
+      vm.filterInput = '';
     }
   }
 
