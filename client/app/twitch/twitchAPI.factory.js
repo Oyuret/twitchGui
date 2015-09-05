@@ -68,7 +68,6 @@
 
           // get the streams which are live
           var streamsUrl = 'https://api.twitch.tv/kraken/streams' + options + '&limit=35&offset=0';
-          console.log(streamsUrl);
           return $http.post('/twitch', {url : streamsUrl});
 
         }).then(function(streams){
