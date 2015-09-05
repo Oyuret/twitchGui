@@ -5,6 +5,12 @@ angular.module('twitchguiApp')
     $scope.menu = [{
       'title': 'Home',
       'link': '/'
+    }, {
+      'title': 'Following',
+      'link': '/following'
+    }, {
+      'title': 'Settings',
+      'link': '/settings'
     }];
 
     $scope.isCollapsed = true;

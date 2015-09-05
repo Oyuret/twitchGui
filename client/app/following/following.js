@@ -3,9 +3,9 @@
 angular.module('twitchguiApp')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/game/:game', {
-        templateUrl: 'app/streams/streams.template.html',
-        controller: 'StreamsCtrl',
+      .when('/following', {
+        templateUrl: 'app/following/following.template.html',
+        controller: 'FollowingController',
         controllerAs: 'vm'
       });
   });
