@@ -17,7 +17,7 @@
     vm.filterInput = '';
 
     // Loading button
-    vm.loadingButtonText = "Fetch more!";
+    vm.loadingButtonText = 'Fetch more!';
     vm.loadingMore = false;
 
     vm.loadGames = loadGames;

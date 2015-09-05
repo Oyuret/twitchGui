@@ -6,9 +6,9 @@
     .module('twitchguiApp')
     .factory('TwitchAPI', twitchApiFactory);
 
-  twitchApiFactory.$inject = ['$http', '$q', '$cookies'];
+  twitchApiFactory.$inject = ['$http', '$q'];
 
-  function twitchApiFactory($http, $q, $cookies) {
+  function twitchApiFactory($http, $q) {
     var factory = {
       getGames : getGames,
       getStreams : getStreams,
@@ -54,17 +54,16 @@
       $http.post('/twitch', {url: url})
         .then(function(following){
 
+          // check if we got any more left
+          if(!following.data.follows || following.data.follows.length === 0) {
+            return $q.reject('No more channels left');
+          }
           // set the next link
           response._links = following.data._links;
 
           // create the options to send to next request
-          var options = '?channel=';
-          var length = following.data.follows.length;
-          for(var i=0; i<length-1; i++) {
-            options += following.data.follows[i].channel.name;
-            options += ',';
-          }
-          options += following.data.follows[length-1].channel.name;
+          var channels = following.data.follows.map(function(item) { return item.channel.name; }).join(',');
+          var options = '?channel=' + channels;
 
           // get the streams which are live
           var streamsUrl = 'https://api.twitch.tv/kraken/streams' + options + '&limit=35&offset=0';

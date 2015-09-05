@@ -1,5 +1,6 @@
 (function(){
   'use strict';
+  /*jshint latedef: nofunc */
 
   angular
     .module('twitchguiApp')
@@ -8,6 +9,7 @@
   settingsCtrl.$inject = ['$cookies'];
 
   function settingsCtrl($cookies) {
+    /*jshint validthis:true */
     var vm = this;
 
     vm.userName = '';
