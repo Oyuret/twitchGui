@@ -6,9 +6,9 @@
     .module('twitchguiApp')
     .controller('FollowingController', followingCtrl);
 
-  followingCtrl.$inject= ['TwitchAPI', 'KodiAPI', '$cookies'];
+  followingCtrl.$inject= ['TwitchAPI', 'KodiAPI', 'cookieSettingsFactory', 'warningModal'];
 
-  function followingCtrl(TwitchAPI, KodiAPI, $cookies) {
+  function followingCtrl(TwitchAPI, KodiAPI, cookieSettingsFactory, warningModal) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -32,8 +32,8 @@
     activate();
 
     function activate() {
-      vm.userName = $cookies.get('twitchUserName');
-      if(vm.userName !== undefined) {
+      vm.userName = cookieSettingsFactory.getUsername();
+      if(vm.userName !== undefined && vm.userName !== '') {
         loadStreams();
       }
     }
@@ -64,8 +64,10 @@
       vm.promises[index].then(function() {
         vm.kodiBusy = false;
       }, function(error){
-        console.log(error);
-        vm.kodiBusy = false;
+        warningModal.warn(error).
+          result.then(function(){
+            vm.kodiBusy = false;
+          });
       });
 
     }

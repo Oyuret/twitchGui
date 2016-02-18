@@ -6,9 +6,9 @@
     .module('twitchguiApp')
     .controller('StreamsCtrl', streamsCtrl);
 
-  streamsCtrl.$inject = ['TwitchAPI', '$routeParams', 'KodiAPI'];
+  streamsCtrl.$inject = ['TwitchAPI', '$routeParams', 'KodiAPI', 'warningModal'];
 
-  function streamsCtrl(TwitchAPI, $routeParams, KodiAPI) {
+  function streamsCtrl(TwitchAPI, $routeParams, KodiAPI, warningModal) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -60,8 +60,12 @@
       vm.promises[index].then(function() {
         vm.kodiBusy = false;
       }, function(error){
-        console.log(error);
-        vm.kodiBusy = false;
+        warningModal.warn(error)
+          .result.then(function(){
+            vm.kodiBusy = false;
+          }, function(){
+            vm.kodiBusy = false;
+          });
       });
 
     }

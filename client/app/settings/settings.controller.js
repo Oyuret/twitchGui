@@ -6,26 +6,27 @@
     .module('twitchguiApp')
     .controller('SettingsController', settingsCtrl);
 
-  settingsCtrl.$inject = ['$cookies'];
+  settingsCtrl.$inject = ['cookieSettingsFactory'];
 
-  function settingsCtrl($cookies) {
+  function settingsCtrl(cookieSettingsFactory) {
     /*jshint validthis:true */
     var vm = this;
 
     vm.userName = '';
+    vm.kodiAddress = '';
 
-    vm.setUsername = setUsername;
+    vm.saveChanges = saveChanges;
 
     activate();
 
     function activate() {
-      vm.userName = $cookies.get('twitchUserName');
+      vm.userName = cookieSettingsFactory.getUsername();
+      vm.kodiAddress = cookieSettingsFactory.getKodiAddress();
     }
 
-    function setUsername() {
-      var now = new Date();
-      var exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
-      $cookies.put('twitchUserName', vm.userName, {expires: exp});
+    function saveChanges() {
+      cookieSettingsFactory.setUsername(vm.userName);
+      cookieSettingsFactory.setKodiAddress(vm.kodiAddress);
     }
 
 

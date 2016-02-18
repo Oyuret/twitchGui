@@ -26,9 +26,10 @@ module.exports = function(app) {
 
   app.post('/kodi', function(req,res){
     var query = req.body.query;
+    var kodiAddr = req.body.kodi;
 
     requestify
-      .post('http://osmc.local/jsonrpc', query, {headers:{'Connection': 'Keep-Alive'}})
+      .post(kodiAddr, query, {headers:{'Connection': 'Keep-Alive'}})
       .then(function(response){
         res.send(response.getBody());
       },function(error){
