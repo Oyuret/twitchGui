@@ -47,7 +47,7 @@
 
       getPlayerId(kodiAddress)
         .then(function(getPlayerIdResponse){
-            return stopPlayerIfRunning(getPlayerIdResponse, kodiAddress);
+          return stopPlayerIfRunning(getPlayerIdResponse, kodiAddress);
         }).then(function(){
           return clearVideoPlaylist(kodiAddress);
         }).then(function(){
