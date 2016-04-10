@@ -6,9 +6,9 @@
     .module('twitchGuiApp')
     .controller('GamesCtrl', mainCtrl);
 
-  mainCtrl.$inject = ['TwitchAPI', '$location'];
+  mainCtrl.$inject = ['TwitchAPI', '$location', '$filter'];
 
-  function mainCtrl(TwitchAPI, $location) {
+  function mainCtrl(TwitchAPI, $location, $filter) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -31,13 +31,12 @@
 
     function loadGames() {
 
-      vm.loadingButtonText = 'Fetching more...';
-      vm.loadingMore = true;
+      disableLoadMoreButton();
       TwitchAPI.getGames(vm.games.length)
         .then(function(games) {
           vm.games = vm.games.concat(games);
-          vm.loadingButtonText = 'Fetch more!';
-          vm.loadingMore = false;
+          vm.games = $filter('unique')(vm.games, 'name');
+          enableLoadMoreButton();
         }, function(){
           vm.loadingButtonText = 'Failed to load more!';
           vm.loadingMore = false;
@@ -50,6 +49,16 @@
 
     function clearFilter() {
       vm.filterInput = '';
+    }
+
+    function disableLoadMoreButton() {
+      vm.loadingButtonText = 'Fetching more...';
+      vm.loadingMore = true;
+    }
+
+    function enableLoadMoreButton() {
+      vm.loadingButtonText = 'Fetch more!';
+      vm.loadingMore = false;
     }
   }
 

@@ -7,7 +7,8 @@ angular.module('twitchGuiApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'cgBusy'
+  'cgBusy',
+  'angular.filter'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
