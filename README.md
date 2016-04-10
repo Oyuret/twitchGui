@@ -1,8 +1,15 @@
 # twitchGui
 
+This project aims to provide GUI for browsing Twitch.tv, as well as starting streams on the Kodi Twitch addon.
+
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.5.0.
 
 ## Getting Started
+
+### Kodi
+
+- Download and install the Kodi [Twitch addon] (https://github.com/StateOfTheArt89/Twitch.tv-on-XBMC) (can be done from within Kodi)
+- [Enable](http://kodi.wiki/view/Webserver#Enabling_the_webserver) Kodi JSON-RPC API
 
 ### Prerequisites
 
