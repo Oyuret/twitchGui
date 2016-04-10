@@ -39,15 +39,14 @@
     }
 
     function loadStreams() {
+      disableLoadMoreButton();
 
-      vm.loadingButtonText = 'Fetching more...';
-      vm.loadingMore = true;
       TwitchAPI.getFollowing(vm.userName, vm.nextUrl)
         .then(function(streams) {
           vm.nextUrl = streams._links.next;
           vm.streams = vm.streams.concat(streams.streams);
-          vm.loadingButtonText = 'Fetch more!';
-          vm.loadingMore = false;
+          addIndexToStreams(vm.streams);
+          enableLoadMoreButton();
         }, function(){
           vm.loadingButtonText = 'Failed to load more!';
           vm.loadingMore = false;
@@ -74,6 +73,22 @@
 
     function clearFilter() {
       vm.filterInput = '';
+    }
+
+    function disableLoadMoreButton() {
+      vm.loadingButtonText = 'Fetching more...';
+      vm.loadingMore = true;
+    }
+
+    function enableLoadMoreButton() {
+      vm.loadingButtonText = 'Fetch more!';
+      vm.loadingMore = false;
+    }
+
+    function addIndexToStreams(streams) {
+      for(var i=0; i<streams.length; i++) {
+        streams[i].index = i;
+      }
     }
   }
 })();

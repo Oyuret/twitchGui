@@ -21,8 +21,8 @@
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" ng-repeat="stream in vm.streams | filter:vm.filterInput">
           <div class="well"
-               cg-busy="{promise:vm.promises[$index],message:'Starting your Stream'}"
-               ng-click="vm.play(stream.channel.name, $index)" style="cursor: pointer">
+               cg-busy="{promise:vm.promises[stream.index],message:'Starting your Stream'}"
+               ng-click="vm.play(stream.channel.name, stream.index)" style="cursor: pointer">
             <div class="row">
               <div class="col-md-4 col-sm-12 col-xs-12">
                 <img class="img-responsive" ng-src="{{stream.preview.medium}}">
