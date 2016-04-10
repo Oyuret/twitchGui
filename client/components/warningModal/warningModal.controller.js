@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .controller('WarningModalController', warningModalCtrl);
 
   warningModalCtrl.$inject = ['message', '$scope'];

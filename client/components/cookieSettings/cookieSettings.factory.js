@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .factory('cookieSettingsFactory', cookieSettingsFactory);
 
   cookieSettingsFactory.$inject = ['$cookies'];

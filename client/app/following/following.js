@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('twitchguiApp')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/following', {
+angular.module('twitchGuiApp')
+  .config(function ($stateProvider) {
+    $stateProvider
+      .state('following', {
+        url: '/following',
         templateUrl: 'app/following/following.template.html',
         controller: 'FollowingController',
         controllerAs: 'vm'

@@ -3,7 +3,7 @@
   /*jshint latedef: nofunc */
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .factory('KodiAPI', kodiApiFactory);
 
   kodiApiFactory.$inject = ['$http', '$q', 'cookieSettingsFactory'];
@@ -63,7 +63,7 @@
 
     function getPlayerId(kodiAddress) {
       var getPlayerIdRequestData = {'jsonrpc': '2.0', 'method': 'Player.GetActivePlayers', 'id': 1};
-      return $http.post('/kodi', {query: getPlayerIdRequestData, kodi: kodiAddress}, {timeout:10000});
+      return $http.post('/api/kodi', {query: getPlayerIdRequestData, kodi: kodiAddress}, {timeout:10000});
     }
 
     function stopPlayerIfRunning(playerIdResponse, kodiAddress) {
@@ -72,7 +72,7 @@
         var id = playerIdResponse.data.result[0].playerid;
         var stopPlayerRequestData = {'jsonrpc': '2.0', 'method': 'Player.Stop', 'params': { 'playerid': id }, 'id': 1};
 
-        return $http.post('/kodi', {query: stopPlayerRequestData, kodi: kodiAddress});
+        return $http.post('/api/kodi', {query: stopPlayerRequestData, kodi: kodiAddress});
       } else {
         return $q.resolve();
       }
@@ -89,7 +89,7 @@
         'params':{'playlistid':1},
         'id': 1
       };
-      return $http.post('/kodi', {query: clearVideoPlaylistRequestData, kodi: kodiAddress}, {timeout:10000});
+      return $http.post('/api/kodi', {query: clearVideoPlaylistRequestData, kodi: kodiAddress}, {timeout:10000});
     }
 
     function addToPlaylist(stream, kodiAddress) {
@@ -101,7 +101,7 @@
         'id' :1
       }];
 
-      return $http.post('/kodi', {query: addToPlaylistRequestData, kodi: kodiAddress}, {timeout:10000});
+      return $http.post('/api/kodi', {query: addToPlaylistRequestData, kodi: kodiAddress}, {timeout:10000});
     }
 
     function playVideo(kodiAddress) {
@@ -113,7 +113,7 @@
         'id': 1
       };
 
-      return $http.post('/kodi',{query: playVideoRequestData, kodi: kodiAddress}, {timeout:30000});
+      return $http.post('/api/kodi',{query: playVideoRequestData, kodi: kodiAddress}, {timeout:30000});
     }
 
   }

@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('twitchguiApp')
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/settings', {
+angular.module('twitchGuiApp')
+  .config(function ($stateProvider) {
+    $stateProvider
+      .state('settings', {
+        url: '/settings',
         templateUrl: 'app/settings/settings.template.html',
         controller: 'SettingsController',
         controllerAs: 'vm'

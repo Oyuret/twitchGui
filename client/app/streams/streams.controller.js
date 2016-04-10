@@ -3,16 +3,16 @@
   /*jshint latedef: nofunc */
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .controller('StreamsCtrl', streamsCtrl);
 
-  streamsCtrl.$inject = ['TwitchAPI', '$routeParams', 'KodiAPI', 'warningModal'];
+  streamsCtrl.$inject = ['TwitchAPI', '$stateParams', 'KodiAPI', 'warningModal'];
 
-  function streamsCtrl(TwitchAPI, $routeParams, KodiAPI, warningModal) {
+  function streamsCtrl(TwitchAPI, $stateParams, KodiAPI, warningModal) {
     /*jshint validthis:true */
     var vm = this;
 
-    vm.game = $routeParams.game;
+    vm.game = $stateParams.game;
     vm.streams = [];
     vm.nextUrl = '';
     vm.promises = [];

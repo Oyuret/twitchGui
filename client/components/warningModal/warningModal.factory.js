@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .factory('warningModal', warningModalFactory);
 
-  warningModalFactory.$inject = ['$modal'];
+  warningModalFactory.$inject = ['$uibModal'];
 
-  function warningModalFactory($modal) {
+  function warningModalFactory($uibModal) {
     var factory = {
       warn : warn
     };
@@ -15,8 +15,8 @@
 
     function warn(message) {
 
-      return $modal.open({
-        templateUrl : 'app/warningModal/warningModal.template.html',
+      return $uibModal.open({
+        templateUrl : 'components/warningModal/warningModal.template.html',
         controller : 'WarningModalController',
         controllerAs: 'vm',
         resolve : {

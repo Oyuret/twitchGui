@@ -3,7 +3,7 @@
   /*jshint latedef: nofunc */
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .controller('SettingsController', settingsCtrl);
 
   settingsCtrl.$inject = ['cookieSettingsFactory'];

@@ -3,7 +3,7 @@
   /*jshint latedef: nofunc */
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .factory('TwitchAPI', twitchApiFactory);
 
   twitchApiFactory.$inject = ['$http', '$q'];
@@ -20,7 +20,7 @@
       var deferred = $q.defer();
       var url = next === '' ? 'https://api.twitch.tv/kraken/games/top?limit=50&offset=0' : next;
 
-      $http.post('/twitch', {url : url})
+      $http.post('/api/twitch', {url : url})
         .then(function(games){
           deferred.resolve(games.data);
         }, function(){
@@ -35,7 +35,7 @@
       var deferred = $q.defer();
       var url = next === '' ? 'https://api.twitch.tv/kraken/streams?limit=25&offset=0&game='+game : next;
 
-      $http.post('/twitch', {url : url})
+      $http.post('/api/twitch', {url : url})
         .then(function(channels){
           deferred.resolve(channels.data);
         }, function(){
@@ -51,7 +51,7 @@
                               username + '/follows/channels?limit=35&offset=0&sortby=created_at': next;
       var response = {};
 
-      $http.post('/twitch', {url: url})
+      $http.post('/api/twitch', {url: url})
         .then(function(following){
 
           // check if we got any more left
@@ -67,7 +67,7 @@
 
           // get the streams which are live
           var streamsUrl = 'https://api.twitch.tv/kraken/streams' + options + '&limit=35&offset=0';
-          return $http.post('/twitch', {url : streamsUrl});
+          return $http.post('/api/twitch', {url : streamsUrl});
 
         }).then(function(streams){
           response.streams = streams.data.streams;

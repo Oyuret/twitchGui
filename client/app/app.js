@@ -1,18 +1,17 @@
 'use strict';
 
-angular.module('twitchguiApp', [
+angular.module('twitchGuiApp', [
+  'twitchGuiApp.constants',
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
+  'ui.router',
   'ui.bootstrap',
   'cgBusy'
 ])
-  .config(function ($routeProvider, $locationProvider) {
-    $routeProvider
-      .otherwise({
-        redirectTo: '/'
-      });
+  .config(function($urlRouterProvider, $locationProvider) {
+    $urlRouterProvider
+      .otherwise('/');
 
     $locationProvider.html5Mode(true);
   });

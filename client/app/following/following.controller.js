@@ -3,7 +3,7 @@
   /*jshint latedef: nofunc */
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .controller('FollowingController', followingCtrl);
 
   followingCtrl.$inject= ['TwitchAPI', 'KodiAPI', 'cookieSettingsFactory', 'warningModal'];

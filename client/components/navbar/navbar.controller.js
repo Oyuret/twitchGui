@@ -1,21 +1,28 @@
 'use strict';
 
-angular.module('twitchguiApp')
-  .controller('NavbarCtrl', function ($scope, $location) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }, {
+class NavbarController {
+  //start-non-standard
+  menu = [
+    {
+      'title': 'Games',
+      'state': 'games'
+    },
+    {
       'title': 'Following',
-      'link': '/following'
-    }, {
+      'state': 'following'
+    },
+    {
       'title': 'Settings',
-      'link': '/settings'
-    }];
+      'state': 'settings'
+    }
+  ];
 
-    $scope.isCollapsed = true;
+  isCollapsed = true;
+  //end-non-standard
 
-    $scope.isActive = function(route) {
-      return route === $location.path();
-    };
-  });
+  constructor() {
+    }
+}
+
+angular.module('twitchGuiApp')
+  .controller('NavbarController', NavbarController);

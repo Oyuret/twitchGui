@@ -3,7 +3,7 @@
   /*jshint latedef: nofunc */
 
   angular
-    .module('twitchguiApp')
+    .module('twitchGuiApp')
     .controller('GamesCtrl', mainCtrl);
 
   mainCtrl.$inject = ['TwitchAPI', '$location'];
