@@ -47,8 +47,23 @@
       var deferred = $q.defer();
 
       $http.get('/api/twitch/streams?game=' + game + '&offset=' + offset)
-        .then(function(channels){
-          deferred.resolve(channels.data);
+        .then(function(streamsData){
+          
+          var streams = [];
+
+          for(var streamData of streamsData.data.streams) {
+            let stream = {
+              name : streamData.channel.name,
+              displayName : streamData.channel.display_name,
+              picture : streamData.preview.medium,
+              status : streamData.channel.status,
+              language : streamData.channel.language,
+              viewers : streamData.viewers
+            };
+            streams.push(stream);
+          }
+
+          deferred.resolve(streams);
         }, function(){
           deferred.reject('Failed to fetch streams');
         });

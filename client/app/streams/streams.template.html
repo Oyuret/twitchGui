@@ -17,18 +17,18 @@
         <div class="col-md-12 col-sm-12 col-xs-12" ng-repeat="stream in vm.streams | filter:vm.filterInput">
           <div class="well"
                cg-busy="{promise:vm.promises[$index],message:'Starting your Stream'}"
-               ng-click="vm.play(stream.channel.name, $index)" style="cursor: pointer">
+               ng-click="vm.play(stream.name, $index)" style="cursor: pointer">
             <div class="row">
               <div class="col-md-4 col-sm-12 col-xs-12">
-                <img class="img-responsive" ng-src="{{stream.preview.medium}}">
+                <img class="img-responsive" ng-src="{{stream.picture}}">
               </div>
               <div class="col-md-8 col-sm-12 col-xs-12">
-                <h4>{{stream.channel.display_name}}</h4>
+                <h4>{{stream.displayName}}</h4>
                 <br>
                 <p style="word-wrap: break-word">
-                  {{stream.channel.status}}
+                  {{stream.status}}
                 </p>
-                <span class="glyphicon glyphicon-globe"> {{stream.channel.language}}</span>
+                <span class="glyphicon glyphicon-globe"> {{stream.language}}</span>
                 <br>
                 <span class="glyphicon glyphicon-user"> {{stream.viewers}}</span>
               </div>

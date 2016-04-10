@@ -6,9 +6,9 @@
     .module('twitchGuiApp')
     .controller('StreamsCtrl', streamsCtrl);
 
-  streamsCtrl.$inject = ['TwitchAPI', '$stateParams', 'KodiAPI', 'warningModal'];
+  streamsCtrl.$inject = ['TwitchAPI', '$stateParams', 'KodiAPI', 'warningModal', '$filter'];
 
-  function streamsCtrl(TwitchAPI, $stateParams, KodiAPI, warningModal) {
+  function streamsCtrl(TwitchAPI, $stateParams, KodiAPI, warningModal, $filter) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -35,13 +35,13 @@
 
     function loadStreams() {
 
-      vm.loadingButtonText = 'Fetching more...';
-      vm.loadingMore = true;
+      disableLoadMoreButton();
+
       TwitchAPI.getStreams(vm.game, vm.streams.length)
         .then(function(streams) {
-          vm.streams = vm.streams.concat(streams.streams);
-          vm.loadingButtonText = 'Fetch more!';
-          vm.loadingMore = false;
+          vm.streams = vm.streams.concat(streams);
+          vm.streams = $filter('unique')(vm.streams, 'name');
+          enableLoadMoreButton();
         }, function(){
           vm.loadingButtonText = 'Failed to load more!';
           vm.loadingMore = false;
@@ -70,6 +70,16 @@
 
     function clearFilter() {
       vm.filterInput = '';
+    }
+
+    function disableLoadMoreButton() {
+      vm.loadingButtonText = 'Fetching more...';
+      vm.loadingMore = true;
+    }
+
+    function enableLoadMoreButton() {
+      vm.loadingButtonText = 'Fetch more!';
+      vm.loadingMore = false;
     }
   }
 
