@@ -20,8 +20,21 @@
       var deferred = $q.defer();
 
       $http.get('/api/twitch/games?offset=' + offset)
-        .then(function(games){
-          deferred.resolve(games.data);
+        .then(function(gamesData){
+          var games = [];
+
+          for(var gameData of gamesData.data.top) {
+            let game = {
+              name : gameData.game.name,
+              channels : gameData.channels,
+              viewers : gameData.viewers,
+              picture : gameData.game.box.medium
+            };
+
+            games.push(game)
+          }
+
+          deferred.resolve(games);
         }, function(){
           deferred.reject('Failed to fetch games');
         });

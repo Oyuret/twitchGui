@@ -35,7 +35,7 @@
       vm.loadingMore = true;
       TwitchAPI.getGames(vm.games.length)
         .then(function(games) {
-          vm.games = vm.games.concat(games.top);
+          vm.games = vm.games.concat(games);
           vm.loadingButtonText = 'Fetch more!';
           vm.loadingMore = false;
         }, function(){
