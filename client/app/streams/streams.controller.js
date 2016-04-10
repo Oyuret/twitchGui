@@ -14,7 +14,6 @@
 
     vm.game = $stateParams.game;
     vm.streams = [];
-    vm.nextUrl = '';
     vm.promises = [];
     vm.kodiBusy = false;
     vm.filterInput = '';
@@ -38,9 +37,8 @@
 
       vm.loadingButtonText = 'Fetching more...';
       vm.loadingMore = true;
-      TwitchAPI.getStreams(vm.game, vm.nextUrl)
+      TwitchAPI.getStreams(vm.game, vm.streams.length)
         .then(function(streams) {
-          vm.nextUrl = streams._links.next;
           vm.streams = vm.streams.concat(streams.streams);
           vm.loadingButtonText = 'Fetch more!';
           vm.loadingMore = false;

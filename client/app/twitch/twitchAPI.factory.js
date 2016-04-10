@@ -16,11 +16,10 @@
     };
     return factory;
 
-    function getGames(next) {
+    function getGames(offset) {
       var deferred = $q.defer();
-      var url = next === '' ? 'https://api.twitch.tv/kraken/games/top?limit=50&offset=0' : next;
 
-      $http.post('/api/twitch', {url : url})
+      $http.get('/api/twitch/games?offset=' + offset)
         .then(function(games){
           deferred.resolve(games.data);
         }, function(){
@@ -31,11 +30,10 @@
 
     }
 
-    function getStreams(game, next) {
+    function getStreams(game, offset) {
       var deferred = $q.defer();
-      var url = next === '' ? 'https://api.twitch.tv/kraken/streams?limit=25&offset=0&game='+game : next;
 
-      $http.post('/api/twitch', {url : url})
+      $http.get('/api/twitch/streams?game=' + game + '&offset=' + offset)
         .then(function(channels){
           deferred.resolve(channels.data);
         }, function(){

@@ -5,6 +5,7 @@ var controller = require('./twitch.controller');
 
 var router = express.Router();
 
-router.post('/', controller.index);
+router.get('/games', controller.games);
+router.get('/streams', controller.streams);
 
 module.exports = router;

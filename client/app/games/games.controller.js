@@ -13,7 +13,6 @@
     var vm = this;
 
     vm.games = [];
-    vm.nextUrl = '';
     vm.filterInput = '';
 
     // Loading button
@@ -34,9 +33,8 @@
 
       vm.loadingButtonText = 'Fetching more...';
       vm.loadingMore = true;
-      TwitchAPI.getGames(vm.nextUrl)
+      TwitchAPI.getGames(vm.games.length)
         .then(function(games) {
-          vm.nextUrl = games._links.next;
           vm.games = vm.games.concat(games.top);
           vm.loadingButtonText = 'Fetch more!';
           vm.loadingMore = false;
