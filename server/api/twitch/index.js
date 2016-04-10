@@ -7,5 +7,7 @@ var router = express.Router();
 
 router.get('/games', controller.games);
 router.get('/streams', controller.streams);
+router.get('/following', controller.following);
+router.get('/followedStreams', controller.followedStreams);
 
 module.exports = router;
