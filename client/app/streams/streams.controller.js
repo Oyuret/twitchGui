@@ -41,6 +41,7 @@
         .then(function(streams) {
           vm.streams = vm.streams.concat(streams);
           vm.streams = $filter('unique')(vm.streams, 'name');
+          addIndexToStreams(vm.streams);
           enableLoadMoreButton();
         }, function(){
           vm.loadingButtonText = 'Failed to load more!';
@@ -80,6 +81,12 @@
     function enableLoadMoreButton() {
       vm.loadingButtonText = 'Fetch more!';
       vm.loadingMore = false;
+    }
+
+    function addIndexToStreams(streams) {
+      for(var i=0; i<streams.length; i++) {
+        streams[i].index = i;
+      }
     }
   }
 

@@ -48,7 +48,6 @@
 
       $http.get('/api/twitch/streams?game=' + game + '&offset=' + offset)
         .then(function(streamsData){
-          
           var streams = [];
 
           for(var streamData of streamsData.data.streams) {
