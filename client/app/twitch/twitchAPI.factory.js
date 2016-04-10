@@ -70,37 +70,65 @@
       return deferred.promise;
     }
 
-    function getFollowing(username, next) {
+    function getFollowing(username, offset) {
       var deferred = $q.defer();
-      var url = next === '' ? 'https://api.twitch.tv/kraken/users/' +
-                              username + '/follows/channels?limit=35&offset=0&sortby=created_at': next;
-      var response = {};
+      var streams = [];
 
-      $http.post('/api/twitch', {url: url})
-        .then(function(following){
+      $http.get('/api/twitch/following?username=' + username + '&offset=' + offset)
+        .then(function(followingData){
 
-          // check if we got any more left
-          if(!following.data.follows || following.data.follows.length === 0) {
-            return $q.reject('No more channels left');
+          var streamsMap = new Map();
+          for(var following of followingData.data.follows) {
+
+            let channel = {
+              name : following.channel.name,
+              displayName : following.channel.display_name,
+              picture: following.channel.video_banner,
+              status: following.channel.status,
+              game : following.channel.game,
+              language : following.channel.language,
+              viewers : 0,
+              online : false
+            };
+
+            streamsMap.set(channel.name, channel);
           }
-          // set the next link
-          response._links = following.data._links;
+          
+          var channels = followingData.data.follows.map(function(item) { return item.channel.name; }).join(',');
+          $http.get('/api/twitch/followedStreams?offset=0&channels=' + channels)
+            .then(function(streamsData){
 
-          // create the options to send to next request
-          var channels = following.data.follows.map(function(item) { return item.channel.name; }).join(',');
-          var options = '?channel=' + channels;
+              for(var streamData of streamsData.data.streams) {
+                let stream = {
+                  name : streamData.channel.name,
+                  displayName : streamData.channel.display_name,
+                  picture : streamData.preview.medium,
+                  status : streamData.channel.status,
+                  game : streamData.game,
+                  language : streamData.channel.language,
+                  viewers : streamData.viewers,
+                  online : true
+                };
 
-          // get the streams which are live
-          var streamsUrl = 'https://api.twitch.tv/kraken/streams' + options + '&limit=35&offset=0';
-          return $http.post('/api/twitch', {url : streamsUrl});
+                streamsMap.set(stream.name, stream);
+              }
 
-        }).then(function(streams){
-          response.streams = streams.data.streams;
-          deferred.resolve(response);
-        },
-        function(){
+              streamsMap.forEach(function(stream){
+                streams.push(stream);
+              });
+
+              deferred.resolve(streams);
+
+            }, function(){
+              deferred.reject('Failed to fetch followed streams');
+            });
+
+
+        }, function(){
           deferred.reject('Failed to fetch followed streams');
         });
+
+
 
       return deferred.promise;
     }

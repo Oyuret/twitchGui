@@ -6,14 +6,13 @@
     .module('twitchGuiApp')
     .controller('FollowingController', followingCtrl);
 
-  followingCtrl.$inject= ['TwitchAPI', 'KodiAPI', 'cookieSettingsFactory', 'warningModal'];
+  followingCtrl.$inject= ['TwitchAPI', 'KodiAPI', 'cookieSettingsFactory', 'warningModal', '$filter'];
 
-  function followingCtrl(TwitchAPI, KodiAPI, cookieSettingsFactory, warningModal) {
+  function followingCtrl(TwitchAPI, KodiAPI, cookieSettingsFactory, warningModal, $filter) {
     /*jshint validthis:true */
     var vm = this;
 
     vm.streams = [];
-    vm.nextUrl = '';
     vm.promises = [];
     vm.kodiBusy = false;
     vm.filterInput = '';
@@ -41,10 +40,10 @@
     function loadStreams() {
       disableLoadMoreButton();
 
-      TwitchAPI.getFollowing(vm.userName, vm.nextUrl)
+      TwitchAPI.getFollowing(vm.userName, vm.streams.length)
         .then(function(streams) {
-          vm.nextUrl = streams._links.next;
-          vm.streams = vm.streams.concat(streams.streams);
+          vm.streams = vm.streams.concat(streams);
+          vm.streams = $filter('unique')(vm.streams, 'name');
           addIndexToStreams(vm.streams);
           enableLoadMoreButton();
         }, function(){

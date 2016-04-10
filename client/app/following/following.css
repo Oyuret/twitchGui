@@ -1,0 +1,8 @@
+.click-enabled {
+  cursor: pointer;
+}
+
+.click-disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
