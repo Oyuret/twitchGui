@@ -19,7 +19,7 @@
       var kodiAddress = cookieSettingsFactory.getKodiAddress();
       var deferred = $q.defer();
 
-      if(kodiAddresIsValid(kodiAddress)) {
+      if(kodiAddressIsValid(kodiAddress)) {
         pushPlay(stream, kodiAddress, deferred);
       } else {
         deferred.reject('Address to Kodi RPC is not correctly defined. Go to Settings and set it.');
@@ -28,7 +28,7 @@
       return deferred.promise;
     }
 
-    function kodiAddresIsValid(kodiAddress) {
+    function kodiAddressIsValid(kodiAddress) {
       var isValid = true;
 
       if(kodiAddress === undefined) {
@@ -56,7 +56,7 @@
           return playVideo(kodiAddress);
         }).then(function(){
           deferred.resolve();
-        }, function(errorMsg){
+        }).catch(function(errorMsg){
           deferred.reject(errorMsg);
         });
     }
