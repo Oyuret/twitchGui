@@ -14,26 +14,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12" ng-repeat="stream in vm.streams | filter:vm.filterInput">
-          <div class="well"
-               cg-busy="{promise:vm.promises[stream.index],message:'Starting your Stream'}"
-               ng-click="vm.play(stream.name, stream.index)" style="cursor: pointer">
-            <div class="row">
-              <div class="col-md-4 col-sm-12 col-xs-12">
-                <img class="img-responsive" ng-src="{{stream.picture}}">
-              </div>
-              <div class="col-md-8 col-sm-12 col-xs-12">
-                <h4>{{stream.displayName}}</h4>
-                <br>
-                <p style="word-wrap: break-word">
-                  {{stream.status}}
-                </p>
-                <span class="glyphicon glyphicon-globe"> {{stream.language}}</span>
-                <br>
-                <span class="glyphicon glyphicon-user"> {{stream.viewers}}</span>
-              </div>
-            </div>
-          </div>
+        <div class="col-md-12 col-sm-12 col-xs-12"
+             ng-repeat="stream in vm.streams | filter:vm.filterInput track by stream.index">
+          <stream-card ng-click="vm.play(stream.name, stream.index)"
+                       stream-promise="vm.promises[stream.index]"
+                       display-name="stream.displayName"
+                       picture="stream.picture"
+                       language="stream.language"
+                       status="stream.status"
+                       viewers="stream.viewers"
+                       online="stream.online"
+                       game="stream.game">
+          </stream-card>
         </div>
       </div>
       <div class="row">

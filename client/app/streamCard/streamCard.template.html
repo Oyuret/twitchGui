@@ -1,0 +1,71 @@
+<div class="well"
+     cg-busy="{promise:streamPromise,message:'Starting your Stream'}"
+     ng-class="::online === true ? 'click-enabled' : 'click-disabled'">
+  <div class="row">
+    <div class="col-md-4 col-sm-12 col-xs-12">
+      <img class="img-responsive" ng-src="{{::picture}}">
+    </div>
+    <div class="col-md-8 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <h4>{{::displayName}}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <p style="word-wrap: break-word">
+            {{::status}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="media">
+            <div class="pull-left">
+              <span class="glyphicon glyphicon-flash"></span>
+            </div>
+            <div class="media-body">
+              {{::game}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="media">
+            <div class="pull-left">
+              <span class="glyphicon glyphicon-globe"></span>
+            </div>
+            <div class="media-body">
+              {{::language}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="media">
+            <div class="pull-left">
+              <span class="glyphicon glyphicon-user"></span>
+            </div>
+            <div class="media-body">
+              {{::viewers}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="media">
+            <div class="pull-left">
+              <span class="glyphicon glyphicon-signal"></span>
+            </div>
+            <div class="media-body">
+              {{::online === true ? 'online' : 'offline'}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -56,8 +56,10 @@
               displayName : streamData.channel.display_name,
               picture : streamData.preview.medium,
               status : streamData.channel.status,
+              game: streamData.channel.game,
               language : streamData.channel.language,
-              viewers : streamData.viewers
+              viewers : streamData.viewers,
+              online: true
             };
             streams.push(stream);
           }
@@ -79,7 +81,6 @@
 
           var streamsMap = new Map();
           for(var following of followingData.data.follows) {
-
             let channel = {
               name : following.channel.name,
               displayName : following.channel.display_name,
@@ -93,7 +94,7 @@
 
             streamsMap.set(channel.name, channel);
           }
-          
+
           var channels = followingData.data.follows.map(function(item) { return item.channel.name; }).join(',');
           $http.get('/api/twitch/followedStreams?offset=0&channels=' + channels)
             .then(function(streamsData){
