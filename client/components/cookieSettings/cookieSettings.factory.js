@@ -12,7 +12,9 @@
       getUsername : getUsername,
       setUsername : setUsername,
       getKodiAddress : getKodiAddress,
-      setKodiAddress : setKodiAddress
+      setKodiAddress : setKodiAddress,
+      getPlaybackQuality : getPlaybackQuality,
+      setPlaybackQuality : setPlaybackQuality
     };
     return factory;
 
@@ -32,6 +34,15 @@
     function setKodiAddress(kodiAddress) {
       var expireDate = getExpireDate();
       $cookies.put('kodiAddress', kodiAddress, {expires: expireDate});
+    }
+
+    function getPlaybackQuality() {
+      return $cookies.get('quality');
+    }
+
+    function setPlaybackQuality(quality) {
+      var expireDate = getExpireDate();
+      $cookies.put('quality', quality, {expires: expireDate})
     }
 
     function getExpireDate() {

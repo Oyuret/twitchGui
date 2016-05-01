@@ -13,6 +13,14 @@
                 <label for="kodiAddress">Kodi Address</label>
                 <input type="url" class="form-control" id="kodiAddress" placeholder="http://kodi.local" ng-model="vm.kodiAddress">
               </div>
+              <div class="form-group">
+                <label for="qualityPicker">Playback Quality</label>
+                <select class="form-control"
+                        id="qualityPicker"
+                        ng-model="vm.playbackQuality"
+                        ng-options="quality.name for quality in vm.playbackQualities">
+                </select>
+              </div>
               <button type="submit" class="btn btn-default">Save settings</button>
             </form>
           </div>

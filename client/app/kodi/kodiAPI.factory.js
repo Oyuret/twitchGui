@@ -8,19 +8,20 @@
 
   kodiApiFactory.$inject = ['$http', '$q', 'cookieSettingsFactory'];
 
-  function kodiApiFactory($http, $q, cookieSettingsFactory) {
+  function kodiApiFactory($http, $q, cookieSettingsFactory, KODI_QUALITIES) {
     var factory = {
       playStream : playStream
     };
+
     return factory;
 
     function playStream(stream) {
-
       var kodiAddress = cookieSettingsFactory.getKodiAddress();
+      var playbackQuality = cookieSettingsFactory.getPlaybackQuality() || KODI_QUALITIES.SETTINGS_DEFAULT;
       var deferred = $q.defer();
 
       if(kodiAddressIsValid(kodiAddress)) {
-        pushPlay(stream, kodiAddress, deferred);
+        pushPlay(stream, kodiAddress, playbackQuality, deferred);
       } else {
         deferred.reject('Address to Kodi RPC is not correctly defined. Go to Settings and set it.');
       }
@@ -40,10 +41,9 @@
       }
 
       return isValid;
-
     }
 
-    function pushPlay(stream, kodiAddress, deferred) {
+    function pushPlay(stream, kodiAddress, playbackQuality, deferred) {
 
       getPlayerId(kodiAddress)
         .then(function(getPlayerIdResponse){
@@ -51,7 +51,7 @@
         }).then(function(){
           return clearVideoPlaylist(kodiAddress);
         }).then(function(){
-          return addToPlaylist(stream, kodiAddress);
+          return addToPlaylist(stream, playbackQuality, kodiAddress);
         }).then(function(){
           return playVideo(kodiAddress);
         }).then(function(){
@@ -92,8 +92,8 @@
       return $http.post('/api/kodi', {query: clearVideoPlaylistRequestData, kodi: kodiAddress}, {timeout:10000});
     }
 
-    function addToPlaylist(stream, kodiAddress) {
-      var pluginPath = 'plugin://plugin.video.twitch/playLive/' + stream + '/';
+    function addToPlaylist(stream,  playbackQuality, kodiAddress) {
+      var pluginPath = `plugin://plugin.video.twitch/playLive/${stream}/${playbackQuality}`;
       var addToPlaylistRequestData = [{
         'jsonrpc': '2.0',
         'method': 'Playlist.Add',
