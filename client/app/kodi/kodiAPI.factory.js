@@ -6,7 +6,7 @@
     .module('twitchGuiApp')
     .factory('KodiAPI', kodiApiFactory);
 
-  kodiApiFactory.$inject = ['$http', '$q', 'cookieSettingsFactory'];
+  kodiApiFactory.$inject = ['$http', '$q', 'cookieSettingsFactory', 'KODI_QUALITIES'];
 
   function kodiApiFactory($http, $q, cookieSettingsFactory, KODI_QUALITIES) {
     var factory = {
