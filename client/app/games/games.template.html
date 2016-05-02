@@ -14,17 +14,43 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-sm-12" ng-repeat="game in vm.games | filter:vm.filterInput">
-          <div class="media well" ng-click="vm.goTo('/game/'+game.name)" style="cursor: pointer">
-            <div class="pull-left">
-              <img class="media-object" ng-src="{{game.picture}}">
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading">{{game.name}}</h4>
-              <br>
-              <span class="glyphicon glyphicon-facetime-video"> {{game.channels}}</span>
-              <br>
-              <span class="glyphicon glyphicon-user"> {{game.viewers}}</span>
+        <div class="col-md-6 col-sm-12" ng-repeat="game in vm.games | filter:vm.filterInput track by game.name">
+          <div class="well" ng-click="vm.goTo('/game/'+game.name)" style="cursor: pointer">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-xs-4">
+                <img class="img-responsive" ng-src="{{::game.picture}}">
+              </div>
+              <div class="col-md-8 col-sm-8 col-xs-8">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h4>{{::game.name}}</h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="media">
+                      <div class="pull-left">
+                        <span class="glyphicon glyphicon-facetime-video"></span>
+                      </div>
+                      <div class="media-body">
+                        {{::game.channels}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="media">
+                      <div class="pull-left">
+                        <span class="glyphicon glyphicon-user"></span>
+                      </div>
+                      <div class="media-body">
+                        {{::game.viewers}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
