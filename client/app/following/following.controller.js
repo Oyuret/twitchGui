@@ -39,14 +39,13 @@
 
     function loadStreams() {
       disableLoadMoreButton();
-
       TwitchAPI.getFollowing(vm.userName, vm.streams.length)
-        .then(function(streams) {
+        .then((streams) => {
           vm.streams = vm.streams.concat(streams);
           vm.streams = $filter('unique')(vm.streams, 'name');
           addIndexToStreams(vm.streams);
           enableLoadMoreButton();
-        }, function(){
+        }).catch(() => {
           vm.loadingButtonText = 'Failed to load more!';
           vm.loadingMore = false;
         });
@@ -59,15 +58,12 @@
 
       vm.kodiBusy = true;
       vm.promises[index] = KodiAPI.playStream(name);
-      vm.promises[index].then(function() {
-        vm.kodiBusy = false;
-      }, function(error){
-        warningModal.warn(error).
-          result.then(function(){
-            vm.kodiBusy = false;
-          });
-      });
-
+      vm.promises[index]
+        .then(() => vm.kodiBusy = false)
+        .catch((error) => {
+          warningModal.warn(error).result
+            .finally(() => vm.kodiBusy = false);
+        });
     }
 
     function clearFilter() {

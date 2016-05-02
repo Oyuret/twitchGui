@@ -30,14 +30,13 @@
     }
 
     function loadGames() {
-
       disableLoadMoreButton();
       TwitchAPI.getGames(vm.games.length)
-        .then(function(games) {
+        .then((games) => {
           vm.games = vm.games.concat(games);
           vm.games = $filter('unique')(vm.games, 'name');
           enableLoadMoreButton();
-        }, function(){
+        }).catch(() => {
           vm.loadingButtonText = 'Failed to load more!';
           vm.loadingMore = false;
         });

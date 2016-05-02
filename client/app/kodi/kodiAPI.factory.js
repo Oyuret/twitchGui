@@ -9,16 +9,15 @@
   kodiApiFactory.$inject = ['$http', '$q', 'cookieSettingsFactory', 'KODI_QUALITIES'];
 
   function kodiApiFactory($http, $q, cookieSettingsFactory, KODI_QUALITIES) {
-    var factory = {
+    let factory = {
       playStream : playStream
     };
-
     return factory;
 
     function playStream(stream) {
-      var kodiAddress = cookieSettingsFactory.getKodiAddress();
-      var playbackQuality = cookieSettingsFactory.getPlaybackQuality() || KODI_QUALITIES.SETTINGS_DEFAULT;
-      var deferred = $q.defer();
+      let kodiAddress = cookieSettingsFactory.getKodiAddress();
+      let playbackQuality = cookieSettingsFactory.getPlaybackQuality() || KODI_QUALITIES.SETTINGS_DEFAULT;
+      let deferred = $q.defer();
 
       if(kodiAddressIsValid(kodiAddress)) {
         pushPlay(stream, kodiAddress, playbackQuality, deferred);
@@ -30,7 +29,7 @@
     }
 
     function kodiAddressIsValid(kodiAddress) {
-      var isValid = true;
+      let isValid = true;
 
       if(kodiAddress === undefined) {
         isValid = false;
@@ -44,22 +43,17 @@
     }
 
     function pushPlay(stream, kodiAddress, playbackQuality, deferred) {
-
-      var playStreamPath = `plugin://plugin.video.twitch/playLive/${stream}/${playbackQuality}`;
-      var playVideoRequestData = {
+      let playStreamPath = `plugin://plugin.video.twitch/playLive/${stream}/${playbackQuality}`;
+      let playVideoRequestData = {
         'jsonrpc': '2.0',
         'method': 'Player.Open',
         'params':{'item':{'file' : playStreamPath }},
         'id': 1
       };
 
-      $http.post('/api/kodi',{query: playVideoRequestData, kodi: kodiAddress}, {timeout:30000})
-        .then(function(){
-          deferred.resolve();
-        })
-        .catch(function(errorMsg){
-          deferred.reject(errorMsg);
-        });
+      $http.post('/api/kodi',{query: playVideoRequestData, kodi: kodiAddress}, {timeout:5000})
+        .then(() => deferred.resolve())
+        .catch((errorMsg) => deferred.reject(errorMsg));
     }
   }
 })();
