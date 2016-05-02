@@ -51,7 +51,7 @@
         'id': 1
       };
 
-      $http.post('/api/kodi',{query: playVideoRequestData, kodi: kodiAddress}, {timeout:5000})
+      $http.post('/api/kodi',{query: playVideoRequestData, kodi: kodiAddress}, {timeout:30000})
         .then(() => deferred.resolve())
         .catch((errorMsg) => deferred.reject(errorMsg));
     }
