@@ -12,6 +12,10 @@ class NavbarController {
       'state': 'following'
     },
     {
+      'title': 'Search',
+      'state': 'search'
+    },
+    {
       'title': 'Settings',
       'state': 'settings'
     }

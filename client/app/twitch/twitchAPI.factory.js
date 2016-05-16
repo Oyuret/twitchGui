@@ -12,7 +12,8 @@
     let factory = {
       getGames : getGames,
       getStreams : getStreams,
-      getFollowing : getFollowing
+      getFollowing : getFollowing,
+      searchGames : searchGames
     };
     return factory;
 
@@ -105,6 +106,28 @@
           streamsMap.forEach((stream) => streams.push(stream));
           deferred.resolve(streams);
         }).catch(() => deferred.reject('Failed to fetch followed streams'));
+
+      return deferred.promise;
+    }
+
+    function searchGames(searchTerm) {
+      let deferred = $q.defer();
+
+      $http.get(`/api/twitch/searchGames?q=${searchTerm}`)
+        .then((gamesData) => {
+          let games = [];
+          for(let gameData of gamesData.data.games) {
+            let game = {
+              name : gameData.name,
+              channels : gameData.channels,
+              viewers : gameData.viewers,
+              picture : gameData.box.medium
+            };
+            games.push(game)
+          }
+
+          deferred.resolve(games);
+        }).catch(() => deferred.reject('Failed to fetch games'));
 
       return deferred.promise;
     }
