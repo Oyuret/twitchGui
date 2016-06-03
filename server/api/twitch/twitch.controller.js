@@ -16,8 +16,6 @@ export function games(req, res) {
     .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
-    },function(error){
-      res.status(400).end(error);
     }).catch(function(error){
       res.status(400).end(error);
     });
@@ -33,8 +31,6 @@ export function streams(req, res) {
     .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
-    },function(error){
-      res.status(400).end(error);
     }).catch(function(error){
     res.status(400).end(error);
   });
@@ -50,8 +46,6 @@ export function following(req, res) {
     .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
-    },function(error){
-      res.status(400).end(error);
     }).catch(function(error){
     res.status(400).end(error);
   });
@@ -66,8 +60,6 @@ export function followedStreams(req, res) {
     .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
-    },function(error){
-      res.status(400).end(error);
     }).catch(function(error){
     res.status(400).end(error);
   });
@@ -82,8 +74,6 @@ export function searchGames(req, res) {
     .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
-    },function(error){
-      res.status(400).end(error);
     }).catch(function(error){
     res.status(400).end(error);
   });

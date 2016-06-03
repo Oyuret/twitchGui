@@ -15,8 +15,6 @@ export function index(req, res) {
     .post(kodiAddr, query, {headers:{'Connection': 'Keep-Alive'}})
     .then(function(response){
       res.send(response.getBody());
-    },function(error){
-      res.status(400).end(error);
     }).catch(function(error){
       res.status(400).end(error);
     });
