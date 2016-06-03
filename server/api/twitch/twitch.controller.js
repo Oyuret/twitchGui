@@ -5,6 +5,7 @@
 
 'use strict';
 var requestify = require('requestify');
+var TWITCH_SECRET = process.env.TWITCH_SECRET;
 
 // Fetch games
 export function games(req, res) {
@@ -12,7 +13,7 @@ export function games(req, res) {
   var url = `https://api.twitch.tv/kraken/games/top?limit=50&offset=${offset}`;
 
   requestify
-    .get(url, {headers:{'Connection': 'Keep-Alive'}})
+    .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
     },function(error){
@@ -29,7 +30,7 @@ export function streams(req, res) {
   var url = `https://api.twitch.tv/kraken/streams?limit=50&offset=${offset}&game=${game}`;
 
   requestify
-    .get(url, {headers:{'Connection': 'Keep-Alive'}})
+    .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
     },function(error){
@@ -46,7 +47,7 @@ export function following(req, res) {
   var url = `https://api.twitch.tv/kraken/users/${username}/follows/channels?limit=50&offset=${offset}`;
 
   requestify
-    .get(url, {headers:{'Connection': 'Keep-Alive'}})
+    .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
     },function(error){
@@ -62,7 +63,7 @@ export function followedStreams(req, res) {
   var url = `https://api.twitch.tv/kraken/streams?limit=50&channel=${channels}`;
 
   requestify
-    .get(url, {headers:{'Connection': 'Keep-Alive'}})
+    .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
     },function(error){
@@ -78,7 +79,7 @@ export function searchGames(req, res) {
   var url = `https://api.twitch.tv/kraken/search/games?q=${q}&type=suggest&live=true`;
 
   requestify
-    .get(url, {headers:{'Connection': 'Keep-Alive'}})
+    .get(url, {headers:{'Connection': 'Keep-Alive', 'Client-ID':TWITCH_SECRET}})
     .then(function(response){
       res.send(response.getBody());
     },function(error){
