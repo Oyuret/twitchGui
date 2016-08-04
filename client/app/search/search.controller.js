@@ -6,9 +6,9 @@
     .module('twitchGuiApp')
     .controller('SearchCtrl', mainCtrl);
 
-  mainCtrl.$inject = ['TwitchAPI', '$location', 'warningModal', '$stateParams'];
+  mainCtrl.$inject = ['TwitchAPI', '$state', 'warningModal', '$stateParams'];
 
-  function mainCtrl(TwitchAPI, $location, warningModal, $stateParams) {
+  function mainCtrl(TwitchAPI, $state, warningModal, $stateParams) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -27,8 +27,8 @@
       querySearch();
     }
 
-    function goToGame(url) {
-      $location.path(url);
+    function goToGame(gameName) {
+      $state.go("streams", {game : gameName});
     }
 
     function search() {
@@ -36,7 +36,7 @@
         return;
       }
 
-      $location.path(`/search/${vm.searchInput}`).replace();
+      $state.go("search", {input : vm.searchInput}, {location: "replace"});
     }
 
     function querySearch() {

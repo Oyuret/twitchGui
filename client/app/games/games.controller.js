@@ -6,9 +6,9 @@
     .module('twitchGuiApp')
     .controller('GamesCtrl', mainCtrl);
 
-  mainCtrl.$inject = ['TwitchAPI', '$location', '$filter'];
+  mainCtrl.$inject = ['TwitchAPI', '$filter', '$state'];
 
-  function mainCtrl(TwitchAPI, $location, $filter) {
+  function mainCtrl(TwitchAPI, $filter, $state) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -42,8 +42,8 @@
         });
     }
 
-    function goTo(url) {
-      $location.path(url);
+    function goTo(gameName) {
+      $state.go("streams", {game:gameName});
     }
 
     function clearFilter() {
