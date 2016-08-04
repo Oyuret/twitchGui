@@ -14,49 +14,32 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6 col-sm-12" ng-repeat="game in vm.games | filter:vm.filterInput track by game.name">
-          <div class="well" ng-click="vm.goTo('/game/'+game.name)" style="cursor: pointer">
-            <div class="row">
-              <div class="col-md-4 col-sm-4 col-xs-4">
-                <img class="img-responsive" ng-src="{{::game.picture}}">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-repeat="game in vm.games | filter:vm.filterInput track by game.name">
+          <div class="thumbnail" ng-click="vm.goTo('/game/'+game.name)" style="cursor: pointer">
+            <img class="img-responsive" style="width: 100%" ng-src="{{::game.picture}}">
+            <div class="caption">
+              <h5 class="title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{::game.name}}</h5>
+              <div class="media" style="margin-top: 0">
+                <div class="pull-left">
+                  <span class="glyphicon glyphicon-user"></span>
+                </div>
+                <div class="media-body">
+                  {{::game.viewers}}
+                </div>
               </div>
-              <div class="col-md-8 col-sm-8 col-xs-8">
-                <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <h4>{{::game.name}}</h4>
-                  </div>
+              <div class="media" style="margin-top: 0">
+                <div class="pull-left">
+                  <span class="glyphicon glyphicon-facetime-video"></span>
                 </div>
-                <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="media">
-                      <div class="pull-left">
-                        <span class="glyphicon glyphicon-facetime-video"></span>
-                      </div>
-                      <div class="media-body">
-                        {{::game.channels}}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="media">
-                      <div class="pull-left">
-                        <span class="glyphicon glyphicon-user"></span>
-                      </div>
-                      <div class="media-body">
-                        {{::game.viewers}}
-                      </div>
-                    </div>
-                  </div>
+                <div class="media-body">
+                  {{::game.channels}}
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="well">
             <button class="btn btn-primary btn-block" ng-disabled="vm.loadingMore"
                     ng-click="vm.loadGames()">{{vm.loadingButtonText}}</button>
