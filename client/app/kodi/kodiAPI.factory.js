@@ -52,8 +52,39 @@
       };
 
       $http.post('/api/kodi',{query: playVideoRequestData, kodi: kodiAddress}, {timeout:30000})
-        .then(() => deferred.resolve())
+        .then((res) => {
+          if(responseFromKodiIsValid(res.data)) {
+            deferred.resolve();
+          } else {
+            deferred.reject("Response from Kodi was invalid");
+          }
+        })
         .catch((errorMsg) => deferred.reject(errorMsg));
+    }
+
+    function responseFromKodiIsValid(res) {
+
+      if(angular.isUndefined(res.id)) {
+        return false;
+      }
+
+      if(res.id !== 1) {
+        return false;
+      }
+
+      if(angular.isUndefined(res.jsonrpc)) {
+        return false;
+      }
+
+      if(angular.isUndefined(res.result)) {
+        return false;
+      }
+
+      if(res.result !== "OK") {
+        return false;
+      }
+
+      return true;
     }
   }
 })();
