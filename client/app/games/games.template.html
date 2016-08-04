@@ -8,13 +8,14 @@
               <input type="text" class="form-control" placeholder="Filter..." ng-model="vm.filterInput">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button" ng-click="vm.clearFilter()">Clear</button>
+                <button class="btn btn-default" type="button" ng-click="vm.reloadGames()" ng-disabled="vm.loadingMore">Reload</button>
               </span>
             </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-repeat="game in vm.games | filter:vm.filterInput track by game.name">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" id="{{::game.name}}" ng-repeat="game in vm.games | filter:vm.filterInput track by game.name">
           <div class="thumbnail" ng-click="vm.goTo(game.name)" style="cursor: pointer">
             <img class="img-responsive" style="width: 100%" ng-src="{{::game.picture}}">
             <div class="caption">

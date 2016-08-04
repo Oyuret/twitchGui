@@ -6,9 +6,12 @@
     .module('twitchGuiApp')
     .controller('GamesCtrl', mainCtrl);
 
-  mainCtrl.$inject = ['TwitchAPI', '$filter', '$state'];
+  mainCtrl.$inject = [
+    'TwitchAPI', '$state', '$anchorScroll',
+    '$location', '$scope', 'GamesState',
+    '$filter'];
 
-  function mainCtrl(TwitchAPI, $filter, $state) {
+  function mainCtrl(TwitchAPI, $state, $anchorScroll, $location, $scope, GamesState, $filter) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -20,13 +23,25 @@
     vm.loadingMore = false;
 
     vm.loadGames = loadGames;
+    vm.reloadGames = reloadGames;
     vm.goTo = goTo;
     vm.clearFilter = clearFilter;
 
     activate();
 
     function activate() {
-      loadGames();
+      if(GamesState.hasSavedState()) {
+        restorePageState();
+      } else {
+        loadGames();
+      }
+    }
+
+    function restorePageState() {
+      let savedState = GamesState.getSavedState();
+      vm.games = savedState.games;
+      $location.hash(savedState.scrollPosition);
+      $anchorScroll();
     }
 
     function loadGames() {
@@ -40,6 +55,11 @@
           vm.loadingButtonText = 'Failed to load more!';
           vm.loadingMore = false;
         });
+    }
+
+    function reloadGames() {
+      vm.games = [];
+      loadGames();
     }
 
     function goTo(gameName) {
@@ -59,6 +79,14 @@
       vm.loadingButtonText = 'Fetch more!';
       vm.loadingMore = false;
     }
+
+    $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+       if(toState.name === "streams") {
+         GamesState.saveState({games: vm.games, scrollPosition : toParams.game});
+       } else {
+         GamesState.saveState({games: vm.games, scrollPosition : undefined});
+       }
+    });
   }
 
 })();
