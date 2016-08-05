@@ -34,6 +34,8 @@
       vm.userName = cookieSettingsFactory.getUsername();
       if(vm.userName !== undefined && vm.userName !== '') {
         loadStreams();
+      } else {
+        vm.userName = undefined;
       }
     }
 
