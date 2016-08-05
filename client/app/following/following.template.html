@@ -20,7 +20,7 @@
       </div>
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12"
-             ng-repeat="stream in vm.streams | filter:vm.filterInput | pick:'online === true' track by stream.index">
+             ng-repeat="stream in vm.streams | fuzzyBy: 'displayName' : vm.filterInput | pick:'online === true' track by stream.index">
           <stream-card ng-click="vm.play(stream.name, stream.index)"
                        stream-promise="vm.promises[stream.index]"
                        display-name="stream.displayName"
