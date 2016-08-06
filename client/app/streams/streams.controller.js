@@ -47,14 +47,14 @@
         });
     }
 
-    function play(name, index) {
+    function play(stream) {
       if(vm.kodiBusy) {
         return;
       }
 
       vm.kodiBusy = true;
-      vm.promises[index] = KodiAPI.playStream(name);
-      vm.promises[index]
+      vm.promises[stream.index] = KodiAPI.playStream(stream.name);
+      vm.promises[stream.index]
         .then(() => vm.kodiBusy = false)
         .catch((error) => {
           warningModal.warn(error).result
@@ -77,7 +77,7 @@
     }
 
     function addIndexToStreams(streams) {
-      for(var i=0; i<streams.length; i++) {
+      for(let i=0; i<streams.length; i++) {
         streams[i].index = i;
       }
     }

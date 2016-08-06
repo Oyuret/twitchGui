@@ -8,10 +8,10 @@
 
   mainCtrl.$inject = [
     'TwitchAPI', '$state', '$anchorScroll',
-    '$location', '$scope', 'GamesState',
-    '$filter'];
+    '$scope', 'GamesState',
+    '$filter', '$timeout'];
 
-  function mainCtrl(TwitchAPI, $state, $anchorScroll, $location, $scope, GamesState, $filter) {
+  function mainCtrl(TwitchAPI, $state, $anchorScroll, $scope, GamesState, $filter, $timeout) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -40,8 +40,7 @@
     function restorePageState() {
       let savedState = GamesState.getSavedState();
       vm.games = savedState.games;
-      $location.hash(savedState.scrollPosition);
-      $anchorScroll();
+      $timeout(() => $anchorScroll(savedState.scrollPosition));
     }
 
     function loadGames() {
