@@ -8,7 +8,8 @@ angular.module('twitchGuiApp', [
   'ui.router',
   'ui.bootstrap',
   'cgBusy',
-  'angular.filter'
+  'angular.filter',
+  'angular.backtop'
 ])
   .config(function($urlRouterProvider, $locationProvider) {
     $urlRouterProvider
