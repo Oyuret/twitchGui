@@ -15,7 +15,6 @@
     vm.games = [];
     vm.searchInput = '';
 
-    vm.goToGame = goToGame;
     vm.search = search;
 
     let searchTerm = $stateParams.input || '';
@@ -25,10 +24,6 @@
     function activate() {
       vm.searchInput = decodeURIComponent(searchTerm);
       querySearch();
-    }
-
-    function goToGame(gameName) {
-      $state.go("streams", {game : gameName});
     }
 
     function search() {

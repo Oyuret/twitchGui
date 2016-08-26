@@ -7,11 +7,11 @@
     .controller('GamesCtrl', mainCtrl);
 
   mainCtrl.$inject = [
-    'TwitchAPI', '$state', '$anchorScroll',
+    'TwitchAPI', '$anchorScroll',
     '$scope', 'GamesState',
     '$filter', '$timeout'];
 
-  function mainCtrl(TwitchAPI, $state, $anchorScroll, $scope, GamesState, $filter, $timeout) {
+  function mainCtrl(TwitchAPI, $anchorScroll, $scope, GamesState, $filter, $timeout) {
     /*jshint validthis:true */
     var vm = this;
 
@@ -24,7 +24,6 @@
 
     vm.loadGames = loadGames;
     vm.reloadGames = reloadGames;
-    vm.goTo = goTo;
     vm.clearFilter = clearFilter;
 
     activate();
@@ -59,10 +58,6 @@
     function reloadGames() {
       vm.games = [];
       loadGames();
-    }
-
-    function goTo(gameName) {
-      $state.go("streams", {game:gameName});
     }
 
     function clearFilter() {
