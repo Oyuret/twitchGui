@@ -5,6 +5,7 @@
 
 'use strict';
 var rp = require('request-promise');
+var querystring = require('querystring');
 var TWITCH_SECRET = process.env.TWITCH_SECRET;
 
 // Fetch games
@@ -39,7 +40,7 @@ export function games(req, res) {
 // Fetch streams
 export function streams(req, res) {
   var offset = req.query.offset || 0;
-  var game = req.query.game;
+  var game = querystring.escape(req.query.game);
   var url = `https://api.twitch.tv/kraken/streams?limit=50&offset=${offset}&game=${game}`;
 
   var options = {
@@ -58,6 +59,7 @@ export function streams(req, res) {
     })
     .catch(function(error){
       if(error.statusCode) {
+        console.log('har');
         res.status(error.statusCode).send(error.message);
       } else {
         res.status(500).send(error.message);
@@ -68,7 +70,7 @@ export function streams(req, res) {
 // Fetch channels we follow
 export function following(req, res) {
   var offset = req.query.offset || 0;
-  var username = req.query.username;
+  var username = querystring.escape(req.query.username);
   var url = `https://api.twitch.tv/kraken/users/${username}/follows/channels?limit=50&offset=${offset}`;
 
   var options = {
@@ -96,7 +98,7 @@ export function following(req, res) {
 
 // Fetch channels we follow
 export function followedStreams(req, res) {
-  var channels = req.query.channels;
+  var channels = querystring.escape(req.query.channels);
   var url = `https://api.twitch.tv/kraken/streams?limit=50&channel=${channels}`;
 
   var options = {
@@ -124,7 +126,7 @@ export function followedStreams(req, res) {
 
 // Search for games
 export function searchGames(req, res) {
-  var q = req.query.q;
+  var q = querystring.escape(req.query.q);
   var url = `https://api.twitch.tv/kraken/search/games?q=${q}&type=suggest&live=true`;
 
   var options = {
