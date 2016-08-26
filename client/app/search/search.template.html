@@ -4,12 +4,14 @@
       <div class="row">
         <div class="col-md-12 col-sm-12">
           <div class="well">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search input..." ng-model="vm.searchInput">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ng-click="vm.search()">Search</button>
+            <form ng-submit="vm.search()">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search input..." ng-model="vm.searchInput">
+                <span class="input-group-btn">
+                <button type="submit" class="btn btn-default">Search</button>
               </span>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -20,10 +22,10 @@
       </div>
       <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" ng-repeat="game in vm.games track by game.name">
-          <a class="thumbnail" ng-href="/game/{{::game.name}}" style="text-decoration: none">
+          <a class="thumbnail" ng-href="/game/{{::game.name}}">
             <img class="img-responsive" style="width: 100%" ng-src="{{::game.picture}}">
             <div class="caption">
-              <h5 class="title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{::game.name}}</h5>
+              <h5 class="title truncated-text" >{{::game.name}}</h5>
             </div>
           </a>
       </div>

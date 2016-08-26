@@ -17,10 +17,10 @@
       <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" id="{{::game.name}}"
              ng-repeat="game in vm.games | fuzzyBy: 'name' : vm.filterInput track by game.name">
-          <a class="thumbnail" ng-href="/game/{{::game.name}}" style="text-decoration: none">
+          <a class="thumbnail" ng-href="/game/{{::game.name}}">
             <img class="img-responsive" style="width: 100%" ng-src="{{::game.picture}}">
             <div class="caption">
-              <h5 class="title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{::game.name}}</h5>
+              <h5 class="title truncated-text">{{::game.name}}</h5>
               <div class="media" style="margin-top: 0">
                 <div class="pull-left">
                   <span class="glyphicon glyphicon-user"></span>
