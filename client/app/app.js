@@ -7,7 +7,7 @@ angular.module('twitchGuiApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'cgBusy',
+  'angular-busy',
   'angular.filter',
   'angular.backtop'
 ])
