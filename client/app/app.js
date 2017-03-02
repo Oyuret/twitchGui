@@ -9,11 +9,15 @@ angular.module('twitchGuiApp', [
   'ui.bootstrap',
   'angular-busy',
   'angular.filter',
-  'angular.backtop'
+  'angular.backtop',
+  'tmh.dynamicLocale'
 ])
-  .config(function($urlRouterProvider, $locationProvider) {
+  .config(function($urlRouterProvider, $locationProvider, tmhDynamicLocaleProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
+
+    tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_sv-se.js');
+    tmhDynamicLocaleProvider.defaultLocale('sv-se');
   });
