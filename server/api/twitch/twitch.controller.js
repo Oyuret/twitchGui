@@ -59,7 +59,6 @@ export function streams(req, res) {
     })
     .catch(function(error){
       if(error.statusCode) {
-        console.log('har');
         res.status(error.statusCode).send(error.message);
       } else {
         res.status(500).send(error.message);
