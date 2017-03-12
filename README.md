@@ -1,6 +1,6 @@
-# twitchGui
+# twitchGui-AngularJS
 
-This project aims to provide GUI for browsing Twitch.tv, as well as starting streams on the Kodi Twitch addon.
+This project aims to provide GUI for browsing Twitch.tv, as well as starting streams on the Kodi Twitch addon. Built on AngularJS.
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.5.0.
 
