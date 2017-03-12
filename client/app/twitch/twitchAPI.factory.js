@@ -6,9 +6,9 @@
     .module('twitchGuiApp')
     .factory('TwitchAPI', twitchApiFactory);
 
-  twitchApiFactory.$inject = ['$http', '$q', '$log'];
+  twitchApiFactory.$inject = ['$http', '$q'];
 
-  function twitchApiFactory($http, $q, $log) {
+  function twitchApiFactory($http, $q) {
     let factory = {
       getGames : getGames,
       getStreams : getStreams,
@@ -35,8 +35,8 @@
 
           deferred.resolve(games);
         }).catch((error) => {
-          $log.error("Failed to fetch games");
-          $log.error(error);
+          console.error("Failed to fetch games");
+          console.error(error);
           deferred.reject();
         });
 
@@ -65,8 +65,8 @@
 
           deferred.resolve(streams);
         }).catch((error) => {
-          $log.error("Failed to fetch streams");
-          $log.error(error);
+          console.log("Failed to fetch streams");
+          console.log(error);
           deferred.reject();
         });
 
@@ -114,8 +114,8 @@
           streamsMap.forEach((stream) => streams.push(stream));
           deferred.resolve(streams);
         }).catch((error) => {
-          $log.error("Failed to fetch followed streams");
-          $log.error(error);
+          console.log("Failed to fetch followed streams");
+          console.log(error);
           deferred.reject();
         });
 
@@ -140,8 +140,8 @@
 
           deferred.resolve(games);
         }).catch((error) => {
-          $log.error("Failed to make a search");
-          $log.error(error);
+          console.error("Failed to make a search");
+          console.error(error);
           deferred.reject();
         });
 

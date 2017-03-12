@@ -24,7 +24,9 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 
 2. Run `bower install` to install front-end dependencies.
 
-3. Run `grunt serve` to start the development server. It should automatically open the client in your browser when ready.
+3. Create a local.env.js file in the folder server/config. Take a look at local.env.sample.js for an example.
+
+4. Run `grunt serve` to start the development server. It should automatically open the client in your browser when ready.
 
 ## Build & development
 

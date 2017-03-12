@@ -8,7 +8,7 @@
 module.exports = {
   DOMAIN:           'http://localhost:9000',
   SESSION_SECRET:   'twitchgui-secret',
-  TWITCH_SECRET: 'my_twitch_client_id_secret',
+  TWITCH_SECRET: 'my_twitch_client_id_secret', // Generated at twitch.tv
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
 };
