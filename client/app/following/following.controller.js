@@ -53,13 +53,13 @@
         });
     }
 
-    function play(name, index) {
+    function play(stream, index) {
       if(vm.kodiBusy) {
         return;
       }
 
       vm.kodiBusy = true;
-      vm.promises[index] = KodiAPI.playStream(name);
+      vm.promises[index] = KodiAPI.playStream(stream);
       vm.promises[index]
         .then(() => vm.kodiBusy = false)
         .catch((error) => {

@@ -53,7 +53,7 @@
       }
 
       vm.kodiBusy = true;
-      vm.promises[stream.index] = KodiAPI.playStream(stream.name);
+      vm.promises[stream.index] = KodiAPI.playStream(stream);
       vm.promises[stream.index]
         .then(() => vm.kodiBusy = false)
         .catch((error) => {

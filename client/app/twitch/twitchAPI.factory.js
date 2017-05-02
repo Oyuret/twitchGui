@@ -51,6 +51,7 @@
           var streams = [];
           for(let streamData of streamsData.data.streams) {
             let stream = {
+              channelId: streamData.channel._id,
               name : streamData.channel.name,
               displayName : streamData.channel.display_name,
               picture : streamData.preview.medium,
@@ -98,6 +99,7 @@
         }).then((streamsData) => {
           for(let streamData of streamsData.data.streams) {
             let stream = {
+              channelId: streamData.channel._id,
               name : streamData.channel.name,
               displayName : streamData.channel.display_name,
               picture : streamData.preview.medium,

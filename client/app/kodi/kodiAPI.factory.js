@@ -43,7 +43,7 @@
     }
 
     function pushPlay(stream, kodiAddress, playbackQuality, deferred) {
-      let playStreamPath = `plugin://plugin.video.twitch/playLive/${stream}/${playbackQuality}`;
+      let playStreamPath = `plugin://plugin.video.twitch/?mode=play&channel_id=${stream.channelId}&name=${stream.name}`;
       let playVideoRequestData = {
         'jsonrpc': '2.0',
         'method': 'Player.Open',
